@@ -14,8 +14,8 @@ async function load() {
   $('rrsets').textContent=report.rrsets_signed.toLocaleString();
   $('verified-label').textContent='BIND VERIFIED · IDENTICAL OUTPUT';
   $('run-description').textContent=`${report.input_a_records.toLocaleString()} hostnames. ${report.rrsets_signed.toLocaleString()} signed record sets. Recorded on ${report.created_at.slice(0,10)}. No GPU is running behind this page.`;
-  $('measurement').textContent=`Median of ${report.repeats} runs per backend on one EC2 g6.xlarge. CPU uses all ${report.threads} vCPUs. GPU also uses those vCPUs. Instance list price: $0.8048/hour.`;
-  $('signing-result').textContent=`${(cpu/gpu).toFixed(2)}× faster end to end. The signing step alone was ${report.speedup_sign.toFixed(2)}× faster.`;
+  $('measurement').textContent=`Median of ${report.repeats} runs per backend on one EC2 g6.xlarge ($0.8048/hour list). Both paths use all ${report.threads} vCPUs; one of them also gets the L4.`;
+  $('signing-result').textContent=`${(cpu/gpu).toFixed(2)}× faster end to end. Signing alone was ${report.speedup_sign.toFixed(2)}× faster; most of what’s left is Python parsing and writing zone files, which the GPU never touches.`;
   const table=document.createElement('table');
   table.innerHTML='<thead><tr><th>Hostnames</th><th>CPU total</th><th>GPU total</th><th>Speedup</th></tr></thead>';
   const body=document.createElement('tbody');
@@ -26,7 +26,7 @@ async function load() {
   }
   table.append(body);$('timings').append(table);
   const phase=document.createElement('p');
-  phase.textContent=`Main run, median phase times — CPU: prepare ${seconds(report.runs.cpu.prepare.median_seconds)}, sign ${seconds(report.runs.cpu.sign.median_seconds)}, write ${seconds(report.runs.cpu.write.median_seconds)}. GPU: prepare ${seconds(report.runs.gpu.prepare.median_seconds)}, sign ${seconds(report.runs.gpu.sign.median_seconds)}, write ${seconds(report.runs.gpu.write.median_seconds)}. Phase medians need not sum to the total median.`;
+  phase.textContent=`Main run, median phase times — CPU: prepare ${seconds(report.runs.cpu.prepare.median_seconds)}, sign ${seconds(report.runs.cpu.sign.median_seconds)}, write ${seconds(report.runs.cpu.write.median_seconds)}. GPU: prepare ${seconds(report.runs.gpu.prepare.median_seconds)}, sign ${seconds(report.runs.gpu.sign.median_seconds)}, write ${seconds(report.runs.gpu.write.median_seconds)}. Phase medians don’t necessarily add up to the total median.`;
   $('timings').append(phase);
   $('record').textContent=proof.rrset;
   if (!window.crypto?.subtle) throw new Error('WebCrypto is unavailable in this browser');
@@ -40,7 +40,7 @@ async function verify(tampered) {
     const data=bytes(sample.canonical_base64); if(tampered) data[data.length-1]^=1;
     const ok=await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,bytes(sample.signature_base64),data);
     status.className=ok?'pass':'fail';
-    status.textContent=tampered ? (ok?'Unexpected: altered record accepted.':'Rejected. Changing one byte breaks the signature.') : (ok?'Valid. Your browser verified the GPU-produced signature.':'Invalid signature.');
+    status.textContent=tampered ? (ok?'Unexpected: altered record accepted.':'Rejected. One changed byte breaks the signature.') : (ok?'Valid. Signed by a GPU, checked by your browser.':'Invalid signature.');
   } catch(error) {status.className='fail';status.textContent=`Verification failed: ${error.message}`;}
 }
 $('verify').addEventListener('click',()=>verify(false));$('tamper').addEventListener('click',()=>verify(true));

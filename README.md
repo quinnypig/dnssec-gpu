@@ -18,7 +18,7 @@ Requirements: Linux, Python 3.11+, a CUDA-capable NVIDIA GPU, its driver, CUDA t
 sudo apt-get update
 sudo apt-get install -y git build-essential libssl-dev libgmp-dev bind9-utils python3-venv
 # Install the NVIDIA driver and CUDA toolkit separately, or use a CUDA image.
-git clone https://github.com/pipeline-of-regret/dnssec-gpu
+git clone https://github.com/quinnypig/dnssec-gpu
 cd dnssec-gpu
 ./scripts/reproduce.sh --records 16384 --repeats 5 --threads 4
 ```

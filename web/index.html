@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>I fixed DNSSEC by adding an NVIDIA dependency.</title>
-<meta name="description" content="A real CUDA DNSSEC signer, a CPU benchmark, and an unreasonable conclusion. Source and signed zone included.">
+<meta name="description" content="A working CUDA DNSSEC signer, benchmarked against OpenSSL on the same machine. Source, signed zone and raw measurements included.">
 <meta property="og:title" content="I fixed DNSSEC by adding an NVIDIA dependency.">
-<meta property="og:description" content="Same zone. Same signatures. More expensive hardware. A measured CPU vs GPU DNSSEC signing experiment.">
+<meta property="og:description" content="Same signatures, more expensive hardware. RSA DNSSEC zone signing on an NVIDIA L4, measured against OpenSSL.">
 <meta name="theme-color" content="#f6f4ed">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
 <script src="/app.js" defer></script>
 </head>
 <body>
-<header><a class="wordmark" href="https://shitposting.ai">shitposting.ai</a><a href="https://github.com/pipeline-of-regret/dnssec-gpu">Source ↗</a></header>
+<header><a class="wordmark" href="https://shitposting.ai">shitposting.ai</a><a href="https://github.com/quinnypig/dnssec-gpu">Source ↗</a></header>
 <main>
 <section class="intro">
 <p class="kicker">DNSSEC / NOW REQUIRES CUDA</p>
 <h1>I fixed DNSSEC by adding an NVIDIA dependency.</h1>
-<p class="lede">Twenty years of debate. Nobody tried a graphics card.</p>
-<p class="aside">Someone <a href="https://ant.isi.edu/events/dinr2016/P/p61.pdf">did, actually</a>. I did it anyway.</p>
+<p class="lede">I moved DNSSEC zone signing onto an NVIDIA L4 and checked every signature against the CPU and BIND. It got faster.</p>
+<p class="aside">Earlier work: <a href="https://ant.isi.edu/events/dinr2016/P/p61.pdf">GPU-accelerated NSEC3 (2016)</a>.</p>
 </section>
 <section class="results" aria-labelledby="result-title">
 <div class="result-head"><h2 id="result-title">Same zone. Same signatures.</h2><span class="stamp" id="verified-label">Loading recorded result</span></div>
@@ -28,26 +28,26 @@
 <div class="bar-row"><div class="bar-label">CPU + GPU <span>4 vCPUs + NVIDIA L4</span></div><div class="bar-track"><div class="bar gpu" id="gpu-bar"></div></div><strong id="gpu-time">—</strong></div>
 <p class="measurement" id="measurement"></p>
 <div class="facts"><div><span>Algorithm</span><strong>RSA/SHA-256</strong><small>2048-bit · DNSSEC algorithm 8</small></div><div><span>Signatures</span><strong id="rrsets">—</strong><small>including NSEC denial proofs</small></div><div><span>Output</span><strong>Byte-identical</strong><small>independently checked by BIND</small></div></div>
-<details><summary>Timing breakdown and smaller batches</summary><div id="timings"></div><p>The total includes reading the unsigned zone, canonicalizing and hashing records, signing, and writing the signed zone. CUDA timings include transfers and CPU work. Key generation, warmup and independent verification are outside the timer. <a href="/data/series.json">All batch measurements</a> · <a href="/data/environment.txt">Machine and compiler details</a>.</p></details>
+<details><summary>Timing breakdown and smaller batches</summary><div id="timings"></div><p>Total time covers reading the unsigned zone, canonicalizing and hashing records, signing, and writing the signed zone. GPU times include transfers and the CPU work around them. Key generation, warmup and verification are excluded. <a href="/data/series.json">All batch measurements</a> · <a href="/data/environment.txt">Machine and compiler details</a>.</p></details>
 <div class="downloads"><a href="/data/report.json">Raw measurements ↓</a><a href="/data/gpu.zone.gz">Signed zone ↓</a><a href="/data/bind-verification.txt">BIND verification ↓</a></div>
 </section>
 <section class="verify" aria-labelledby="verify-title">
 <p class="kicker">CHECK THE WORK</p><h2 id="verify-title">Your browser can verify one.</h2>
-<p>This is a real record set from the measured run. WebCrypto checks its RSA signature locally. Change one byte and it should fail.</p>
+<p>A real record set from the measured run, signed on the GPU. WebCrypto checks the RSA signature locally. Change one byte and it fails.</p>
 <pre id="record">Loading signed record…</pre>
 <div class="buttons"><button id="verify" disabled>Verify signature</button><button id="tamper" class="secondary" disabled>Change a byte &amp; verify</button></div>
 <p id="verification" role="status" aria-live="polite">The public key is included. The private key is not.</p>
-<p class="fine">This checks the archived signature, not a live DNS delegation or today’s signature validity window. <a href="/data/sample.json">Download the record, signed bytes and public key.</a></p>
+<p class="fine">This checks an archived signature over saved bytes. It says nothing about live DNS or whether the signature is still inside its validity window. <a href="/data/sample.json">Download the record, signed bytes and public key.</a></p>
 </section>
 <section class="notes" aria-labelledby="notes-title"><h2 id="notes-title">What this fixes</h2>
 <dl><div><dt>Signing this zone</dt><dd id="signing-result">Measured results are loading.</dd></div><div><dt>The trust model</dt><dd>No change.</dd></div><div><dt>Key rollovers</dt><dd>Still your problem.</dd></div><div><dt>Twenty years of arguments</dt><dd>Now with a CUDA dependency.</dd></div></dl>
-<p>The experiment followed <a href="https://circleid.com/posts/common-beliefs-about-dnssec-put-to-the-test-an-invitation-to-fact-check-your-assumptions">this DNSSEC discussion</a> and Thomas H. Ptáček’s response. It does not settle the disagreement.</p>
-<p class="limit"><strong>Benchmark code, not a production signer.</strong> The GPU implementation uses variable-time CGBN arithmetic without RSA blinding. OpenSSL’s CPU path includes protections this prototype does not. This is not a comparison of equally hardened implementations.</p>
-<p>Signatures are generated ahead of queries. This does not make ordinary DNS lookups faster, and it says nothing about ECDSA or Ed25519 performance.</p>
+<p>Prompted by <a href="https://circleid.com/posts/common-beliefs-about-dnssec-put-to-the-test-an-invitation-to-fact-check-your-assumptions">this DNSSEC discussion</a> and Thomas H. Ptáček’s reply. It settles nothing.</p>
+<p class="limit"><strong>Benchmark code. Don’t sign anything real with it.</strong> The GPU path uses variable-time CGBN arithmetic and no RSA blinding. OpenSSL’s CPU path has protections this prototype lacks, so these are not equally hardened signers.</p>
+<p>Zones are signed before anyone queries them. This won’t make a single DNS lookup faster, and it says nothing about ECDSA or Ed25519.</p>
 </section>
-<section class="reproduce"><h2>Bring your own GPU.</h2><p>The code builds a complete test zone, signs it both ways, compares the files and runs BIND’s verifier.</p><pre>git clone https://github.com/pipeline-of-regret/dnssec-gpu
+<section class="reproduce"><h2>Bring your own GPU.</h2><p>The script builds a test zone, signs it both ways, compares the output byte for byte and runs BIND’s verifier.</p><pre>git clone https://github.com/quinnypig/dnssec-gpu
 cd dnssec-gpu
-./scripts/reproduce.sh</pre><a class="source-link" href="https://github.com/pipeline-of-regret/dnssec-gpu">Code, requirements and methodology ↗</a></section>
+./scripts/reproduce.sh</pre><a class="source-link" href="https://github.com/quinnypig/dnssec-gpu">Code, requirements and methodology ↗</a></section>
 </main>
-<footer><span>Built by <a href="https://github.com/quinnypig">Corey Quinn</a>.</span><span><a href="https://doom.shitposting.cloud">Doom over DNS</a> · <a href="https://llm.shitposting.cloud">LLM over DNS</a></span></footer>
+<footer><span>Built by <a href="https://shitposting.ai">Corey Quinn</a>.</span><span><a href="https://doom.shitposting.cloud">Doom over DNS</a> · <a href="https://llm.shitposting.cloud">LLM over DNS</a></span></footer>
 </body></html>
