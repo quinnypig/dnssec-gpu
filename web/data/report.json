@@ -1,0 +1,120 @@
+{
+  "created_at": "2026-10-14T15:41:56.656865+00:00",
+  "algorithm": "RSASHA256 (DNSSEC algorithm 8)",
+  "key_bits": 2048,
+  "input_a_records": 16384,
+  "threads": 4,
+  "repeats": 5,
+  "python": "3.12.3",
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "gpu": "NVIDIA L4, 595.91.07, 23034 MiB",
+  "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+  "inception": 1791988912,
+  "expiration": 1794584512,
+  "verification_time": 1791992512,
+  "runs": {
+    "cpu": {
+      "total": {
+        "samples_seconds": [
+          19.913244007999992,
+          20.012103421000006,
+          20.201337782999985,
+          19.98968825999998,
+          19.977406908000034
+        ],
+        "median_seconds": 19.98968825999998,
+        "min_seconds": 19.913244007999992
+      },
+      "prepare": {
+        "samples_seconds": [
+          7.402339341000015,
+          7.533290781000005,
+          7.524599397999964,
+          7.479285429000015,
+          7.4610688919999575
+        ],
+        "median_seconds": 7.479285429000015,
+        "min_seconds": 7.402339341000015
+      },
+      "sign": {
+        "samples_seconds": [
+          8.880107256999963,
+          8.851195306999955,
+          8.950375065999992,
+          8.832992894999961,
+          8.834700316000067
+        ],
+        "median_seconds": 8.851195306999955,
+        "min_seconds": 8.832992894999961
+      },
+      "write": {
+        "samples_seconds": [
+          3.6307974100000138,
+          3.627617333000046,
+          3.726363319000029,
+          3.6774099360000037,
+          3.6816377000000102
+        ],
+        "median_seconds": 3.6774099360000037,
+        "min_seconds": 3.627617333000046
+      }
+    },
+    "gpu": {
+      "total": {
+        "samples_seconds": [
+          11.313655428000004,
+          11.33572595999999,
+          11.384068524999975,
+          11.414190001000065,
+          11.353382162999992
+        ],
+        "median_seconds": 11.353382162999992,
+        "min_seconds": 11.313655428000004
+      },
+      "prepare": {
+        "samples_seconds": [
+          7.542161481999983,
+          7.4463750539999864,
+          7.48900060699998,
+          7.522189224000044,
+          7.470522455000037
+        ],
+        "median_seconds": 7.48900060699998,
+        "min_seconds": 7.4463750539999864
+      },
+      "sign": {
+        "samples_seconds": [
+          0.19003806300003134,
+          0.18879620000001296,
+          0.17806298200002857,
+          0.19126391099996454,
+          0.1863178879999623
+        ],
+        "median_seconds": 0.18879620000001296,
+        "min_seconds": 0.17806298200002857
+      },
+      "write": {
+        "samples_seconds": [
+          3.5814558829999896,
+          3.7005547059999913,
+          3.7170049359999666,
+          3.7007368660000566,
+          3.696541819999993
+        ],
+        "median_seconds": 3.7005547059999913,
+        "min_seconds": 3.5814558829999896
+      }
+    }
+  },
+  "timing": "Full pipeline reads unsigned zone, canonicalizes RRsets, hashes, signs and writes signed zone. Key generation, library load, warmup and independent verification excluded. Signing time includes CPU preparation, CUDA allocation when needed, transfers, synchronization and CRT recombination.",
+  "security_limit": "GPU prototype uses variable-time CGBN arithmetic without RSA blinding; CPU uses OpenSSL protections. Not a production signer.",
+  "cuda_initialization_seconds": 0.14692078600000968,
+  "rrsets_signed": 32774,
+  "speedup_total": 1.7606813523062057,
+  "speedup_sign": 46.8822746803132,
+  "byte_identical_zones": true,
+  "bind_verified": true,
+  "verified": true,
+  "zone_sha256": "5d4f62fb289f2e6377855943ec0d348791ea8c851c7879844482fd3eabd47855",
+  "public_dnskey": "257 3 8 AwEAAZoSHElCOehGWcUv9tHUi4i7CeGl /YJqtDVfeueIMImCMNIgsrx9BFyZuUxL W5wjbMJcMXJl5oXvS5s0oUmSipic7zq5 wbl7NceCybQ5nvy1pduHNFFasKDoC+xM /xDnKS3eKBLOSFC3zIVpduLa3Vc0vikU BjFy6MgTzKmRnKCvAXBpK2jTGA49bQ2n UxVErcRFn88LNzhSoVYUBzXhk1bRMOR5 UC7DP2eocrQU4DjCRJfVi9fCq+2g7GbK CUDvfhHJ3d4C+INXQ0yoMMVxvMUHlBdV ox4jIFNRpkzkAgQlCoTz/sYtVncnhNAn vV9y2O40xU3eUSITm0oMxW9UeEM="
+}

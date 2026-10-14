@@ -1,0 +1,362 @@
+[
+  {
+    "created_at": "2026-10-14T15:41:08.051957+00:00",
+    "algorithm": "RSASHA256 (DNSSEC algorithm 8)",
+    "key_bits": 2048,
+    "input_a_records": 256,
+    "threads": 4,
+    "repeats": 5,
+    "python": "3.12.3",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "gpu": "NVIDIA L4, 595.91.07, 23034 MiB",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "inception": 1791988867,
+    "expiration": 1794584467,
+    "verification_time": 1791992467,
+    "runs": {
+      "cpu": {
+        "total": {
+          "samples_seconds": [
+            0.31373888799998895,
+            0.3046228160000055,
+            0.30750184500004707,
+            0.3066645359999711,
+            0.3110925369999791
+          ],
+          "median_seconds": 0.30750184500004707,
+          "min_seconds": 0.3046228160000055
+        },
+        "prepare": {
+          "samples_seconds": [
+            0.11594869499998595,
+            0.11044587700001784,
+            0.11055857100001276,
+            0.1103439429999753,
+            0.1154809380000188
+          ],
+          "median_seconds": 0.11055857100001276,
+          "min_seconds": 0.1103439429999753
+        },
+        "sign": {
+          "samples_seconds": [
+            0.14100544100000434,
+            0.13991798400002153,
+            0.14041908100000455,
+            0.1401199509999742,
+            0.14051710499995806
+          ],
+          "median_seconds": 0.14041908100000455,
+          "min_seconds": 0.13991798400002153
+        },
+        "write": {
+          "samples_seconds": [
+            0.05678475199999866,
+            0.054258954999966136,
+            0.056524193000029754,
+            0.05620064200002162,
+            0.055094494000002214
+          ],
+          "median_seconds": 0.05620064200002162,
+          "min_seconds": 0.054258954999966136
+        }
+      },
+      "gpu": {
+        "total": {
+          "samples_seconds": [
+            0.182569591999993,
+            0.17008037499999773,
+            0.1711716130000127,
+            0.17091567400001395,
+            0.17075613899999098
+          ],
+          "median_seconds": 0.17091567400001395,
+          "min_seconds": 0.17008037499999773
+        },
+        "prepare": {
+          "samples_seconds": [
+            0.11351493099999743,
+            0.11070782500001997,
+            0.1109786850000205,
+            0.1109649539999964,
+            0.11069001499998876
+          ],
+          "median_seconds": 0.1109649539999964,
+          "min_seconds": 0.11069001499998876
+        },
+        "sign": {
+          "samples_seconds": [
+            0.013283083999965584,
+            0.004440301999977692,
+            0.004627207999988059,
+            0.004461542999990797,
+            0.004534655000043131
+          ],
+          "median_seconds": 0.004534655000043131,
+          "min_seconds": 0.004440301999977692
+        },
+        "write": {
+          "samples_seconds": [
+            0.05577157700002999,
+            0.05493224800000007,
+            0.05556572000000415,
+            0.05548917700002676,
+            0.05553146899995909
+          ],
+          "median_seconds": 0.05553146899995909,
+          "min_seconds": 0.05493224800000007
+        }
+      }
+    },
+    "timing": "Full pipeline reads unsigned zone, canonicalizes RRsets, hashes, signs and writes signed zone. Key generation, library load, warmup and independent verification excluded. Signing time includes CPU preparation, CUDA allocation when needed, transfers, synchronization and CRT recombination.",
+    "security_limit": "GPU prototype uses variable-time CGBN arithmetic without RSA blinding; CPU uses OpenSSL protections. Not a production signer.",
+    "cuda_initialization_seconds": 0.1454799640000033,
+    "rrsets_signed": 518,
+    "speedup_total": 1.799143623305268,
+    "speedup_sign": 30.965769391203736,
+    "byte_identical_zones": true,
+    "bind_verified": true,
+    "verified": true,
+    "zone_sha256": "23e7243ae95a83ade0be9f9871d905b2eeef3c7698bff0dcf0e51f0b085cb7ee",
+    "public_dnskey": "257 3 8 AwEAAZ1yBhJgKnwHLFp3/CtEYyh6Br2Q 88gl0JC4lbeDrRQdZaxCFQ1ltWiyPDmk antpoVQ1Vd4GTTAi8C1xOOQq+ol94xcg HsfIAkdWItJJM6T97kxDXtzQQpeupLD3 BBJIGP5nJzItOYTaLixVcR3zjbud3EV6 6tCAkhqAdGjbsqbKDiQdkqLPxysRhqyL DhgVc/VyLqoR2caCGpOHw55IZzIPZAvL yKFmsxRWwVpctLH5PTAhXOKdNRnk/XiW WHQBfU7a99mS4hNug0Kjhc05K51UBwUM r0+N0/zXMAaP8yvBNYgE4/CxzRjf0j5W U1J5H+ixdLqsEuVCGFo34hr2Znc="
+  },
+  {
+    "created_at": "2026-10-14T15:41:11.937261+00:00",
+    "algorithm": "RSASHA256 (DNSSEC algorithm 8)",
+    "key_bits": 2048,
+    "input_a_records": 4096,
+    "threads": 4,
+    "repeats": 5,
+    "python": "3.12.3",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "gpu": "NVIDIA L4, 595.91.07, 23034 MiB",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "inception": 1791988871,
+    "expiration": 1794584471,
+    "verification_time": 1791992471,
+    "runs": {
+      "cpu": {
+        "total": {
+          "samples_seconds": [
+            4.859529749000046,
+            4.862245109000014,
+            4.885424674000035,
+            4.8957702280000035,
+            4.870762754999987
+          ],
+          "median_seconds": 4.870762754999987,
+          "min_seconds": 4.859529749000046
+        },
+        "prepare": {
+          "samples_seconds": [
+            1.7757052200000203,
+            1.784746632000008,
+            1.7852036780000162,
+            1.8152294820000066,
+            1.7965303060000224
+          ],
+          "median_seconds": 1.7852036780000162,
+          "min_seconds": 1.7757052200000203
+        },
+        "sign": {
+          "samples_seconds": [
+            2.2116898269999865,
+            2.213074978999998,
+            2.2122260400000187,
+            2.2113967029999912,
+            2.2134000909999827
+          ],
+          "median_seconds": 2.2122260400000187,
+          "min_seconds": 2.2113967029999912
+        },
+        "write": {
+          "samples_seconds": [
+            0.8721347020000394,
+            0.8644234980000078,
+            0.887994956,
+            0.8691440430000057,
+            0.8608323579999819
+          ],
+          "median_seconds": 0.8691440430000057,
+          "min_seconds": 0.8608323579999819
+        }
+      },
+      "gpu": {
+        "total": {
+          "samples_seconds": [
+            2.6802537260000463,
+            2.697753875999979,
+            2.701230590000023,
+            2.712220926000043,
+            2.7189751349999938
+          ],
+          "median_seconds": 2.701230590000023,
+          "min_seconds": 2.6802537260000463
+        },
+        "prepare": {
+          "samples_seconds": [
+            1.7829776060000313,
+            1.79635147099998,
+            1.7914965390000361,
+            1.797616491000042,
+            1.786661358999993
+          ],
+          "median_seconds": 1.7914965390000361,
+          "min_seconds": 1.7829776060000313
+        },
+        "sign": {
+          "samples_seconds": [
+            0.04551134399997636,
+            0.04440123199998425,
+            0.04120880299996088,
+            0.04129590599995936,
+            0.04042710999999599
+          ],
+          "median_seconds": 0.04129590599995936,
+          "min_seconds": 0.04042710999999599
+        },
+        "write": {
+          "samples_seconds": [
+            0.8517647760000386,
+            0.8570011730000147,
+            0.8685252480000258,
+            0.8733085290000417,
+            0.8918866660000049
+          ],
+          "median_seconds": 0.8685252480000258,
+          "min_seconds": 0.8517647760000386
+        }
+      }
+    },
+    "timing": "Full pipeline reads unsigned zone, canonicalizes RRsets, hashes, signs and writes signed zone. Key generation, library load, warmup and independent verification excluded. Signing time includes CPU preparation, CUDA allocation when needed, transfers, synchronization and CRT recombination.",
+    "security_limit": "GPU prototype uses variable-time CGBN arithmetic without RSA blinding; CPU uses OpenSSL protections. Not a production signer.",
+    "cuda_initialization_seconds": 0.15002829000002293,
+    "rrsets_signed": 8198,
+    "speedup_total": 1.8031643699844024,
+    "speedup_sign": 53.57010547249395,
+    "byte_identical_zones": true,
+    "bind_verified": true,
+    "verified": true,
+    "zone_sha256": "b41955001232bcf09dfa999e994abf67de9246d004411af4ed475f3eb2ef4d64",
+    "public_dnskey": "257 3 8 AwEAAeEbEJCKJ1/7rArgCrClxGSrpPL4 017pV5ZAprNwqrAEBniJ0wKvclOQvm3p d5IPE+82z+LFvery3CL6eZRJFvCtI6fA 2T46h/hzH+vshQECzzMXfBVNLVZ77y+E WhH7Iy/UZHRUQkP1oZXPUkT75Oh2jcwO PFjkar5StGSOywhGwJ0BCIjvpSwvvxdZ knkyxw1yaH10fa6Wyx0R+cUhM81tYo9e nQCYJVoOs4tcOoyZXTjTTsTg0Oba9kVa +YiFRPJ5CCExqhZh6HS+CiUVRnvuVYK1 2CrXWKqlnMwKhn+VlKOyuDXqvD40C7+m iWTBzLWCyv3LDOumEBwV1eGMKrs="
+  },
+  {
+    "created_at": "2026-10-14T15:41:56.656865+00:00",
+    "algorithm": "RSASHA256 (DNSSEC algorithm 8)",
+    "key_bits": 2048,
+    "input_a_records": 16384,
+    "threads": 4,
+    "repeats": 5,
+    "python": "3.12.3",
+    "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+    "gpu": "NVIDIA L4, 595.91.07, 23034 MiB",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "inception": 1791988912,
+    "expiration": 1794584512,
+    "verification_time": 1791992512,
+    "runs": {
+      "cpu": {
+        "total": {
+          "samples_seconds": [
+            19.913244007999992,
+            20.012103421000006,
+            20.201337782999985,
+            19.98968825999998,
+            19.977406908000034
+          ],
+          "median_seconds": 19.98968825999998,
+          "min_seconds": 19.913244007999992
+        },
+        "prepare": {
+          "samples_seconds": [
+            7.402339341000015,
+            7.533290781000005,
+            7.524599397999964,
+            7.479285429000015,
+            7.4610688919999575
+          ],
+          "median_seconds": 7.479285429000015,
+          "min_seconds": 7.402339341000015
+        },
+        "sign": {
+          "samples_seconds": [
+            8.880107256999963,
+            8.851195306999955,
+            8.950375065999992,
+            8.832992894999961,
+            8.834700316000067
+          ],
+          "median_seconds": 8.851195306999955,
+          "min_seconds": 8.832992894999961
+        },
+        "write": {
+          "samples_seconds": [
+            3.6307974100000138,
+            3.627617333000046,
+            3.726363319000029,
+            3.6774099360000037,
+            3.6816377000000102
+          ],
+          "median_seconds": 3.6774099360000037,
+          "min_seconds": 3.627617333000046
+        }
+      },
+      "gpu": {
+        "total": {
+          "samples_seconds": [
+            11.313655428000004,
+            11.33572595999999,
+            11.384068524999975,
+            11.414190001000065,
+            11.353382162999992
+          ],
+          "median_seconds": 11.353382162999992,
+          "min_seconds": 11.313655428000004
+        },
+        "prepare": {
+          "samples_seconds": [
+            7.542161481999983,
+            7.4463750539999864,
+            7.48900060699998,
+            7.522189224000044,
+            7.470522455000037
+          ],
+          "median_seconds": 7.48900060699998,
+          "min_seconds": 7.4463750539999864
+        },
+        "sign": {
+          "samples_seconds": [
+            0.19003806300003134,
+            0.18879620000001296,
+            0.17806298200002857,
+            0.19126391099996454,
+            0.1863178879999623
+          ],
+          "median_seconds": 0.18879620000001296,
+          "min_seconds": 0.17806298200002857
+        },
+        "write": {
+          "samples_seconds": [
+            3.5814558829999896,
+            3.7005547059999913,
+            3.7170049359999666,
+            3.7007368660000566,
+            3.696541819999993
+          ],
+          "median_seconds": 3.7005547059999913,
+          "min_seconds": 3.5814558829999896
+        }
+      }
+    },
+    "timing": "Full pipeline reads unsigned zone, canonicalizes RRsets, hashes, signs and writes signed zone. Key generation, library load, warmup and independent verification excluded. Signing time includes CPU preparation, CUDA allocation when needed, transfers, synchronization and CRT recombination.",
+    "security_limit": "GPU prototype uses variable-time CGBN arithmetic without RSA blinding; CPU uses OpenSSL protections. Not a production signer.",
+    "cuda_initialization_seconds": 0.14692078600000968,
+    "rrsets_signed": 32774,
+    "speedup_total": 1.7606813523062057,
+    "speedup_sign": 46.8822746803132,
+    "byte_identical_zones": true,
+    "bind_verified": true,
+    "verified": true,
+    "zone_sha256": "5d4f62fb289f2e6377855943ec0d348791ea8c851c7879844482fd3eabd47855",
+    "public_dnskey": "257 3 8 AwEAAZoSHElCOehGWcUv9tHUi4i7CeGl /YJqtDVfeueIMImCMNIgsrx9BFyZuUxL W5wjbMJcMXJl5oXvS5s0oUmSipic7zq5 wbl7NceCybQ5nvy1pduHNFFasKDoC+xM /xDnKS3eKBLOSFC3zIVpduLa3Vc0vikU BjFy6MgTzKmRnKCvAXBpK2jTGA49bQ2n UxVErcRFn88LNzhSoVYUBzXhk1bRMOR5 UC7DP2eocrQU4DjCRJfVi9fCq+2g7GbK CUDvfhHJ3d4C+INXQ0yoMMVxvMUHlBdV ox4jIFNRpkzkAgQlCoTz/sYtVncnhNAn vV9y2O40xU3eUSITm0oMxW9UeEM="
+  }
+]

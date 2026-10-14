@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dnssec-gpu",
+  "account_id": "e857c740cc49dc71df4e5a92c4aa007b",
+  "compatibility_date": "2026-10-14",
+  "assets": {"directory": "./web"},
+  "routes": [{"pattern": "dnssec.shitposting.cloud", "custom_domain": true}],
+  "workers_dev": false
+}

@@ -1,0 +1,7 @@
+Loading zone 'gpu.test.' from file 'artifacts/run-16384/gpu.zone'
+
+Verifying the zone using the following algorithms:
+- RSASHA256
+Zone fully signed:
+Algorithm: RSASHA256: KSKs: 1 active, 0 stand-by, 0 revoked
+                      ZSKs: 0 active, 0 stand-by, 0 revoked
