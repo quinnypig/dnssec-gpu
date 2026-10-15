@@ -3,7 +3,7 @@ name = "dnssec-gpu"
 version = "0.1.0"
 description = "I fixed DNSSEC by adding an NVIDIA dependency."
 requires-python = ">=3.11"
-dependencies = ["dnspython[dnssec]==2.8.0", "cryptography>=45,<47"]
+dependencies = ["dnspython[dnssec]==2.8.0", "cryptography>=50,<51"]
 
 [project.scripts]
 dnssec-gpu = "dnssec_gpu:main"
