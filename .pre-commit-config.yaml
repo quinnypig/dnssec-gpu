@@ -1,0 +1,16 @@
+# Vendored CGBN code and recorded benchmark output stay byte-for-byte as published.
+exclude: ^(native/(powm\.cuh|CGBN-LICENSE)|web/data/)
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+        exclude: ^wrangler\.jsonc$
+      - id: check-merge-conflict
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.1
+    hooks:
+      - id: ruff-check

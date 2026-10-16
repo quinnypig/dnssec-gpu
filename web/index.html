@@ -22,7 +22,7 @@
 </section>
 <section class="results" aria-labelledby="result-title">
 <div class="result-head"><h2 id="result-title">Same zone. Same signatures.</h2><span class="stamp" id="verified-label">Loading recorded result</span></div>
-<p id="run-description">Recorded benchmark. No GPU is running behind this page.</p>
+<p id="run-description">This is a recorded benchmark. No GPU is running behind this page.</p>
 <div class="headline"><strong id="speedup">—</strong><span>faster end to end<br><small>on this workload, on this machine</small></span></div>
 <div class="bar-row"><div class="bar-label">CPU <span>4 vCPUs · OpenSSL</span></div><div class="bar-track"><div class="bar cpu" id="cpu-bar"></div></div><strong id="cpu-time">—</strong></div>
 <div class="bar-row"><div class="bar-label">CPU + GPU <span>4 vCPUs + NVIDIA L4</span></div><div class="bar-track"><div class="bar gpu" id="gpu-bar"></div></div><strong id="gpu-time">—</strong></div>
@@ -32,8 +32,8 @@
 <div class="downloads"><a href="/data/report.json">Raw measurements ↓</a><a href="/data/gpu.zone.gz">Signed zone ↓</a><a href="/data/bind-verification.txt">BIND verification ↓</a></div>
 </section>
 <section class="verify" aria-labelledby="verify-title">
-<p class="kicker">CHECK THE WORK</p><h2 id="verify-title">Your browser can verify one.</h2>
-<p>A real record set from the measured run, signed on the GPU. WebCrypto checks the RSA signature locally. Change one byte and it fails.</p>
+<p class="kicker">CHECK THE WORK</p><h2 id="verify-title">Verify a signature in your browser.</h2>
+<p>Your browser uses WebCrypto to check the RSA signature on a record set from the measured GPU run. Change one byte and verification fails.</p>
 <pre id="record">Loading signed record…</pre>
 <div class="buttons"><button id="verify" disabled>Verify signature</button><button id="tamper" class="secondary" disabled>Change a byte &amp; verify</button></div>
 <p id="verification" role="status" aria-live="polite">The public key is included. The private key is not.</p>
