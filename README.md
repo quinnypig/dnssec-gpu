@@ -80,3 +80,39 @@ CUDA modular exponentiation is adapted from NVIDIA's [CGBN sample_03_powm](https
 The joke followed [this CircleID article](https://circleid.com/posts/common-beliefs-about-dnssec-put-to-the-test-an-invitation-to-fact-check-your-assumptions) and Thomas H. Ptáček's response. Neither endorses this project. [GPU work on DNSSEC existed in 2016](https://ant.isi.edu/events/dinr2016/P/p61.pdf); novelty is not the claim.
 
 Built by Corey Quinn with AI assistance. MIT licensed.
+
+## CPU verification and release receipts
+
+`make check` uses the committed Python lock, runs the existing CPU zone/tamper
+oracle, and checks retained result integrity. It recomputes timing summaries and
+speedups from every recorded trial, independently verifies the saved sample with
+cryptography and dnspython canonicalization, and validates all 32,774 retained
+RRset signatures at the report's original verification time. It does not extend
+signature validity to today, reproduce CUDA timing, establish the historical
+CPU/GPU comparison anew, or rerun BIND.
+
+`.fleet/recorded-results.json` pins exact historical artifact hashes and supported
+machine-readable claims. Missing/tampered output, unsupported claims, incorrect
+medians/ratios, signature/canonicalization disagreement, and README headline drift
+fail validation. The original benchmark source revision is not present in the
+retained report and remains explicitly unknown. Hash consistency is not an
+authenticity signature; byte-identical CPU/GPU output and BIND acceptance remain
+claims of the original run, with the original bytes/log retained.
+
+`make evidence` requires a clean checkout and reruns the CPU checks before writing
+ignored `.fleet-evidence/inputs.json` and `release.json`. The receipt binds the
+current verifier/CPU-check source revision, toolchain and every tracked input via
+a hashed manifest. Its source revision does not identify the historical GPU run.
+The PR workflow retains only sanitized hashes/references and check statuses for
+14 days. `gpu-runtime`, `bind-rerun`, and deployment stay `not-observed`, including
+on machines with no NVIDIA GPU or CUDA compiler. A passing CPU job never promotes
+those states. Native CUDA correctness/performance still requires the existing
+explicit reproduction procedure on suitable hardware; this work does not run it.
+
+The separate Component contract PR job validates declarations with the canonical
+fleet JSON Schema pinned at `977e851fbaacabb250b14ed2bb28c6aff9187e85`.
+The vendored schema and provenance are checked against the pinned SHA-256 before
+installing `jsonschema[format]==4.26.0`; no private repository credentials or
+sibling checkout are needed. Negative fixtures cover path traversal, unsupported
+versions/profiles, malformed schemas, and schema artifact tampering. These are
+real CI checks; repository branch-protection enforcement is not asserted here.
