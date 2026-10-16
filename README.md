@@ -108,3 +108,11 @@ The PR workflow retains only sanitized hashes/references and check statuses for
 on machines with no NVIDIA GPU or CUDA compiler. A passing CPU job never promotes
 those states. Native CUDA correctness/performance still requires the existing
 explicit reproduction procedure on suitable hardware; this work does not run it.
+
+The separate Component contract PR job validates declarations with the canonical
+fleet JSON Schema pinned at `977e851fbaacabb250b14ed2bb28c6aff9187e85`.
+The vendored schema and provenance are checked against the pinned SHA-256 before
+installing `jsonschema[format]==4.26.0`; no private repository credentials or
+sibling checkout are needed. Negative fixtures cover path traversal, unsupported
+versions/profiles, malformed schemas, and schema artifact tampering. These are
+real CI checks; repository branch-protection enforcement is not asserted here.

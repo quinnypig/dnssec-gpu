@@ -16,7 +16,8 @@
           "."
         ],
         "required_checks": [
-          "test"
+          "test",
+          "Component contract"
         ]
       },
       "deployment": {
@@ -40,7 +41,8 @@
           "native"
         ],
         "required_checks": [
-          "test"
+          "test",
+          "Component contract"
         ]
       },
       "deployment": {
@@ -64,7 +66,8 @@
           "web"
         ],
         "required_checks": [
-          "test"
+          "test",
+          "Component contract"
         ]
       },
       "deployment": {
