@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "repository": "quinnypig/dnssec-gpu",
+  "components": [
+    {
+      "id": "dnssec-gpu",
+      "path": ".",
+      "profile": "experiment",
+      "lifecycle": "experimental",
+      "validation": {
+        "command": [
+          "make",
+          "check"
+        ],
+        "paths": [
+          "."
+        ],
+        "required_checks": [
+          "test",
+          "Component contract"
+        ]
+      },
+      "deployment": {
+        "owner": "quinnypig/dnssec-gpu"
+      },
+      "telemetry": {
+        "mode": "none"
+      }
+    },
+    {
+      "id": "cuda-signer",
+      "path": "native",
+      "profile": "experiment",
+      "lifecycle": "experimental",
+      "validation": {
+        "command": [
+          "make",
+          "check"
+        ],
+        "paths": [
+          "native"
+        ],
+        "required_checks": [
+          "test",
+          "Component contract"
+        ]
+      },
+      "deployment": {
+        "owner": "quinnypig/dnssec-gpu"
+      },
+      "telemetry": {
+        "mode": "none"
+      }
+    },
+    {
+      "id": "recorded-site",
+      "path": "web",
+      "profile": "static",
+      "lifecycle": "active",
+      "validation": {
+        "command": [
+          "make",
+          "check"
+        ],
+        "paths": [
+          "web"
+        ],
+        "required_checks": [
+          "test",
+          "Component contract"
+        ]
+      },
+      "deployment": {
+        "owner": "quinnypig/dnssec-gpu"
+      },
+      "telemetry": {
+        "mode": "none"
+      }
+    }
+  ]
+}

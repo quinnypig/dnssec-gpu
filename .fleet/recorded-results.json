@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "historical_source_revision": null,
+  "provenance": "historical-run-source-not-recorded",
+  "artifacts": {
+    "web/data/report.json": "sha256:da25bb2ec67d5aa26d4debd852285cba220a4a0e0e71c42d5c5eea5f372f66ab",
+    "web/data/series.json": "sha256:46c36a93c57734e295b17735ebca7686c677a9f131a78c1097d672155b6dc324",
+    "web/data/sample.json": "sha256:78cb186accaa3f2c0d8614faf4fe03c4e1e50b961a0535895d1a7d51a847112d",
+    "web/data/gpu.zone.gz": "sha256:57d59a90aef2dbd57e4bf87fcafcb5193a12523363feb0d0bea46a31248ea8a7",
+    "web/data/bind-verification.txt": "sha256:5cf9281a698b0313d5ab6c2f0a967a4b5a86e3aaa8af063a3b0af65fb285afc0",
+    "web/data/environment.txt": "sha256:4e62a83dc3672aa2c4e022aeca5bc84ac887a612095f6eb26972c686c34f8e0d"
+  },
+  "claims": {
+    "rrsets_signed": 32774,
+    "cpu_seconds": 19.99,
+    "gpu_seconds": 11.35,
+    "speedup_total": 1.76,
+    "speedup_sign": 46.88
+  }
+}
