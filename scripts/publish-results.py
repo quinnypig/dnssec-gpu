@@ -4,7 +4,6 @@ import argparse
 import gzip
 import hashlib
 import json
-import shutil
 from pathlib import Path
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -27,11 +26,17 @@ for run in args.runs:
     ):
         raise SystemExit(f"Zone checksum mismatch: {run}")
     reports.append(report)
-args.destination.mkdir(parents=True, exist_ok=True)
-for name in ("report.json", "sample.json", "bind-verification.txt"):
-    shutil.copyfile(args.runs[-1] / name, args.destination / name)
-(args.destination / "series.json").write_text(json.dumps(reports, indent=2) + "\n")
-(args.destination / "gpu.zone.gz").write_bytes(
-    gzip.compress((args.runs[-1] / "gpu.zone").read_bytes(), mtime=0)
+# Read and prepare the entire bundle before touching previously published files.
+# A missing sample or verification log must not leave a new report beside old data.
+artifacts = {
+    name: (args.runs[-1] / name).read_bytes()
+    for name in ("report.json", "sample.json", "bind-verification.txt")
+}
+artifacts["series.json"] = (json.dumps(reports, indent=2) + "\n").encode()
+artifacts["gpu.zone.gz"] = gzip.compress(
+    (args.runs[-1] / "gpu.zone").read_bytes(), mtime=0
 )
+args.destination.mkdir(parents=True, exist_ok=True)
+for name, data in artifacts.items():
+    (args.destination / name).write_bytes(data)
 print(f"Published {len(reports)} verified runs to {args.destination}")
