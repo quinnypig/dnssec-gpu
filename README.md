@@ -66,6 +66,8 @@ To refresh the site from completed runs:
 python3 scripts/publish-results.py artifacts/run-256 artifacts/run-4096 artifacts/run-16384
 ```
 
+That command copies the run artifacts; it does not update the machine details, README headline, or pinned evidence. Before deploying new results, replace `web/data/environment.txt` with details from the new run, update the headline from its report, and update the artifact hashes and claims in `.fleet/recorded-results.json` from the reviewed output. Run `make check` before committing, then `make evidence` from the clean commit. The retained-evidence checks deliberately reject a refresh that still carries the previous run's hashes or claims.
+
 ## Tests and website
 
 ```sh
