@@ -148,7 +148,8 @@ def summary(samples):
 
 def benchmark(args):
     out = args.output
-    out.mkdir(parents=True, exist_ok=True)
+    # Never mix a failed rerun with a previous run's successful report.
+    out.mkdir(parents=True, exist_ok=False)
     key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
     now = int(time.time())
     inception = now - 3600

@@ -27,6 +27,8 @@ The script does not provision cloud resources. It builds the native library, ins
 
 Outputs go to `artifacts/run/`: unsigned zone, CPU and GPU signed zones, all timings in `report.json`, BIND verification output, and a browser-verifiable example in `sample.json`. The private key is ephemeral and is never written to these files. Each new run generates a fresh key; output hashes therefore differ between runs.
 
+The output directory must not already exist. For another run, choose a fresh path with `--output artifacts/run-2`; this also applies after a failed run, so old results cannot be mixed with a new attempt.
+
 For the batch-size series used on the website:
 
 ```sh
