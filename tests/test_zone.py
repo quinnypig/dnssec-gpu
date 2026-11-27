@@ -1,9 +1,23 @@
+import tempfile
 import time
 import unittest
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from cryptography.exceptions import InvalidSignature
 
-from dnssec_gpu import assemble, hashes, make_zone, padding, prepare, rsa, utils, verify
+from dnssec_gpu import (
+    assemble,
+    benchmark,
+    hashes,
+    make_zone,
+    padding,
+    prepare,
+    rsa,
+    utils,
+    verify,
+)
 
 
 class ZoneTests(unittest.TestCase):
@@ -30,3 +44,25 @@ class ZoneTests(unittest.TestCase):
     def test_reject_empty_zone(self):
         with self.assertRaises(ValueError):
             make_zone(0, None)
+
+    def test_existing_run_survives_failed_rerun(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "run"
+            output.mkdir()
+            previous = {
+                "unsigned.zone": b"previous unsigned zone\n",
+                "gpu.zone": b"previous signed zone\n",
+                "report.json": b'{"verified": true}\n',
+            }
+            for name, data in previous.items():
+                (output / name).write_bytes(data)
+            args = SimpleNamespace(output=output, records=1, library="unused")
+            with (
+                patch("dnssec_gpu.Signer", side_effect=RuntimeError("CUDA unavailable")) as signer,
+                self.assertRaises(FileExistsError),
+            ):
+                benchmark(args)
+            signer.assert_not_called()
+            self.assertEqual(
+                {name: (output / name).read_bytes() for name in previous}, previous
+            )
